@@ -90,7 +90,16 @@ class Beyonic {
 
     self::$lastResult = $responseArray;
 
-    return( json_decode( $responseArray['responseJSON'] ) );
+    $endpointObject = json_decode( $responseArray['responseJSON'] );
+
+    if( $endpointObject != NULL )
+      if( is_array( $endpointObject ) )
+        foreach( $endpointObject as $index => $object )
+          $endpointObject[$index] = new Beyonic_Response( $object, $endpoint );
+      else
+          $endpointObject = new Beyonic_Response( $endpointObject, $endpoint );
+
+    return( $endpointObject );
   }
 }
 ?>

@@ -14,3 +14,4 @@ require(dirname(__FILE__) . '/Beyonic/Beyonic.php');
 require(dirname(__FILE__) . '/Beyonic/Endpoint_Wrapper.php');
 require(dirname(__FILE__) . '/Beyonic/Webhook.php');
 require(dirname(__FILE__) . '/Beyonic/Payment.php');
+require(dirname(__FILE__) . '/Beyonic/Response.php');

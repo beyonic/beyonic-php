@@ -23,13 +23,9 @@ $newWebhook = $resp;
 echo "Webhook $newWebhook->id calls $newWebhook->target on event $newWebhook->event.\n";
 
 /* Update the new callback */
-$callbackValues = array(
-    'event' => 'payment.status.changed',
-    'target' => 'https://mysite.com/callbacks/v2/payment'
-);
-$resp = Beyonic_Webhook::update( $newWebhook->id, $callbackValues );
+$newWebhook->target = 'https://mysite.com/callbacks/v2/payment';
+$updatedWebhook = $newWebhook->send();
 echo 'Update Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
-$updatedWebhook = $resp;
 echo "Webhook $updatedWebhook->id calls $updatedWebhook->target on event $updatedWebhook->event.\n";
 
 /* Delete the new callback */
