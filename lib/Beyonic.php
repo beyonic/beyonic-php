@@ -8,6 +8,7 @@ class Beyonic {
   public static $apiKey = null;
   public static $apiURL = 'https://staging.beyonic.com/api';
   public static $apiVersion = 'v1';
+  public static $lastResult = null;
 
   /*
     setAPIKey - Sets the API Key for this client / developer.
@@ -71,16 +72,15 @@ class Beyonic {
 
     $response = curl_exec($ch);
 
-    $httpCode = curl_getinfo( $ch, CURLINFO_HTTP_CODE);
+    $responseArray = array();
+    $responseArray['httpResponseCode'] = curl_getinfo( $ch, CURLINFO_HTTP_CODE);
 
     $headerSize = curl_getinfo( $ch, CURLINFO_HEADER_SIZE);
-    $responseJSON = json_decode( substr($response, $headerSize) );
+    $responseArray['responseJSON'] = substr($response, $headerSize);
 
-    $responseObj = new stdClass();
-    $responseObj->httpResponseCode = $httpCode;
-    $responseObj->result = $responseJSON;
+    self::$lastResult = $responseArray;
 
-    return( $responseObj );
+    return( json_decode( $responseArray['responseJSON'] ) );
   }
 }
 
@@ -126,7 +126,7 @@ class BeyonicWebhook extends BeyonicEndpointWrapper {
   protected static $endpoint = 'webhooks';
 
   /* Add a new Webhook for the specified $event for the given $target */
-  public static function add( $event, $target ) {
+  public static function create( $event, $target ) {
 
     $array = array( 'event' => $event, 'target' => $target );
     return( self::postRequest( $array ) );
@@ -146,7 +146,7 @@ class BeyonicWebhook extends BeyonicEndpointWrapper {
   }
 
   /* Show all Webhooks or the one identified by $id */
-  public static function show( $id = null ) {
+  public static function get( $id = null ) {
 
     return( self::getRequest( $id ) );
   }
