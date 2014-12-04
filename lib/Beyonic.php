@@ -7,7 +7,7 @@ class Beyonic {
 
   public static $apiKey = null;
   public static $apiURL = 'https://staging.beyonic.com/api';
-  public static $apiVersion = 'v1';
+  public static $apiVersion = null;
   public static $lastResult = null;
 
   /*
@@ -47,8 +47,10 @@ class Beyonic {
 			'Content-Type: application/json',
 			'Content-Language:en-US',
       'Authorization: Token ' . self::$apiKey,
-      'Beyonic-Version: ' . self::$apiVersion
     );
+
+    if( self::$apiVersion != null )
+      $httpHeaders[] = 'Beyonic-Version: ' . self::$apiVersion;
 
 		$ch = curl_init();
     switch ($method) {
@@ -60,7 +62,7 @@ class Beyonic {
                         $httpHeaders[] = 'Content-Length:' . strlen( $jsonData );
                       }
                       break;
-      case 'PUT':     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+      case 'PUT':     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
                       if( $jsonData != null ) {
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
                         $httpHeaders[] = 'Content-Length:' . strlen( $jsonData );
@@ -96,30 +98,36 @@ class Beyonic {
   The BeyonicEndpointWrapper class provides common routines needed by
   all interface classses.
 */
-class BeyonicEndpointWrapper {
+class Beyonic_Endpoint_Wrapper {
 
   protected static $endpoint = null;
 
-  /* Make a GET request with the classes endpoint */
-  protected static function getRequest( $id = null ) {
+  /* Get the associated object with $id */
+  public static function get( $id ) {
 
     return( Beyonic::sendRequest( static::$endpoint, 'GET', $id ) );
   }
 
-  /* Make a POST request with the classes endpoint */
-  protected static function postRequest( $parameters ) {
+  /* Get all of the associated object with $id */
+  public static function getAll( ) {
+
+    return( Beyonic::sendRequest( static::$endpoint, 'GET', null ) );
+  }
+
+  /* Create the new object based on the $parameters */
+  public static function create( $parameters ) {
 
     return( Beyonic::sendRequest( static::$endpoint, 'POST', null, $parameters ) );
   }
 
-  /* Make a PUT request with the classes endpoint */
-  protected static function putRequest( $id, $parameters  ) {
+  /* Update the object associated with $id usjing $parameters */
+  public static function update( $id, $parameters  ) {
 
     return( Beyonic::sendRequest( static::$endpoint, 'PUT', $id, $parameters ) );
   }
 
-  /* Make a DELETE request with the classes endpoint */
-  protected static function deleteRequest( $id = null ) {
+  /* Delete the object associated with $id */
+  public static function delete( $id ) {
 
     return( Beyonic::sendRequest( static::$endpoint, 'DELETE', $id ) );
   }
@@ -129,49 +137,18 @@ class BeyonicEndpointWrapper {
   The BeyonicWebhook class provides access to list, create, add & delete
   Webhook callbacks.
 */
-class BeyonicWebhook extends BeyonicEndpointWrapper {
+class Beyonic_Webhook extends Beyonic_Endpoint_Wrapper {
 
   protected static $endpoint = 'webhooks';
 
-  /* Add a new Webhook for the specified $event for the given $target */
-  public static function create( $event, $target ) {
-
-    $array = array( 'event' => $event, 'target' => $target );
-    return( self::postRequest( $array ) );
-  }
-
-  /* Update the Webhook $id with $event and $target */
-  public static function update( $id, $event, $target ) {
-
-    $array = array( 'event' => $event, 'target' => $target );
-    return( self::putRequest( $id, $array ) );
-  }
-
-  /* Delete the Webhook $id */
-  public static function delete( $id ) {
-
-    return( self::deleteRequest( $id ) );
-  }
-
-  /* Show all Webhooks or the one identified by $id */
-  public static function get( $id = null ) {
-
-    return( self::getRequest( $id ) );
-  }
 }
 
 /*
   The BeyonicPayment class provides access to the Payment API.
 */
-class BeyonicPayment extends BeyonicEndpointWrapper {
+class Beyonic_Payment extends Beyonic_Endpoint_Wrapper {
 
   protected static $endpoint = 'payments';
-
-  /* Create a payment using the values provided in $array */
-  public static function create( $array ) {
-
-    return( self::postRequest( $array ) );
-  }
 
 }
 ?>

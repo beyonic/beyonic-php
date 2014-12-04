@@ -7,29 +7,37 @@ require( 'lib/Beyonic.php' );
 Beyonic::setApiKey( '6202349b8068b349b6e0b389be2a65cc36847c75' );
 
 /* Show the current callbacks */
-$resp = BeyonicWebhook::get();
+$resp = Beyonic_Webhook::getAll();
 echo 'Get Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 foreach( $resp as $index => $hook )
   echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
 
 /* Add a new callback */
-$resp = BeyonicWebhook::create( 'payment.status.changed', 'https://mysite.com/callbacks/payment' );
+$callbackValues = array(
+    'event' => 'payment.status.changed',
+    'target' => 'https://mysite.com/callbacks/payment'
+);
+$resp = Beyonic_Webhook::create( $callbackValues );
 echo 'Create Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 $newWebhook = $resp;
 echo "Webhook $newWebhook->id calls $newWebhook->target on event $newWebhook->event.\n";
 
 /* Update the new callback */
-$resp = BeyonicWebhook::update( $newWebhook->id, 'payment.status.changed', 'https://mysite.com/callbacks/v2/payment' );
+$callbackValues = array(
+    'event' => 'payment.status.changed',
+    'target' => 'https://mysite.com/callbacks/v2/payment'
+);
+$resp = Beyonic_Webhook::update( $newWebhook->id, $callbackValues );
 echo 'Update Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 $updatedWebhook = $resp;
 echo "Webhook $updatedWebhook->id calls $updatedWebhook->target on event $updatedWebhook->event.\n";
 
 /* Delete the new callback */
-$resp = BeyonicWebhook::delete( $newWebhook->id );
+$resp = Beyonic_Webhook::delete( $newWebhook->id );
 echo 'Delete Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 
 /* Show the current callbacks */
-$resp = BeyonicWebhook::get();
+$resp = Beyonic_Webhook::getAll();
 echo 'Get Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 foreach( $resp as $index => $hook )
   echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
@@ -47,7 +55,7 @@ $paymentValues = array(
     /* Information used by application to identify transaction */
     'metadata'    => "{ 'appId': 'my-application', 'xactId': '1' }"
 );
-$resp = BeyonicPayment::create( $paymentValues );
+$resp = Beyonic_Payment::create( $paymentValues );
 echo 'Create Payment Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 foreach( $resp as $key => $value )
   if( is_object( $value ) || is_array( $value ) ) {
