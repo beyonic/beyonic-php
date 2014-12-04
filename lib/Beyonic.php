@@ -13,9 +13,17 @@ class Beyonic {
   /*
     setAPIKey - Sets the API Key for this client / developer.
   */
-  public static function setAPIKey( $newAPIKey ) {
+  public static function setApiKey( $newApiKey ) {
 
-    self::$apiKey = $newAPIKey;
+    self::$apiKey = $newApiKey;
+  }
+
+  /*
+    setAPIVersion - Sets the API Version for this client / developer.
+  */
+  public static function setApiVersion( $newApiVersion ) {
+
+    self::$apiVersion = $newApiVersion;
   }
 
   /*

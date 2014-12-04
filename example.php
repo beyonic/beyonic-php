@@ -4,7 +4,7 @@
 require( 'lib/Beyonic.php' );
 
 /* Set the API Key to be used in all requests */
-Beyonic::setAPIKey( '6202349b8068b349b6e0b389be2a65cc36847c75' );
+Beyonic::setApiKey( '6202349b8068b349b6e0b389be2a65cc36847c75' );
 
 /* Show the current callbacks */
 $resp = BeyonicWebhook::get();
