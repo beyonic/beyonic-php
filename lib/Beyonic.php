@@ -8,10 +8,10 @@ if (!function_exists('json_decode')) {
 }
 
 // Beyonic Primary Interface
-require(dirname(__FILE__) . '/Beyonic/Beyonic.php');
+require_once(dirname(__FILE__) . '/Beyonic/Beyonic.php');
 
 // Beyonic API endpoints
-require(dirname(__FILE__) . '/Beyonic/Endpoint_Wrapper.php');
-require(dirname(__FILE__) . '/Beyonic/Webhook.php');
-require(dirname(__FILE__) . '/Beyonic/Payment.php');
-require(dirname(__FILE__) . '/Beyonic/Response.php');
+require_once(dirname(__FILE__) . '/Beyonic/Endpoint_Wrapper.php');
+require_once(dirname(__FILE__) . '/Beyonic/Webhook.php');
+require_once(dirname(__FILE__) . '/Beyonic/Payment.php');
+require_once(dirname(__FILE__) . '/Beyonic/Beyonic_Exception.php');

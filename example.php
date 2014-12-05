@@ -7,12 +7,25 @@ require( 'lib/Beyonic.php' );
 Beyonic::setApiKey( '6202349b8068b349b6e0b389be2a65cc36847c75' );
 
 /* Show the current callbacks */
+echo "**********\n";
+echo "Getting All Webhooks\n";
 $resp = Beyonic_Webhook::getAll();
 echo 'Get Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 foreach( $resp as $index => $hook )
   echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
+echo "**********\n\n";
+
+/* Get a single callback */
+echo "**********\n";
+echo "Getting Webhook for " . $resp[0]->id . "\n";
+$hook = Beyonic_Webhook::get( $resp[0]->id );
+echo 'Get by Id Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
+echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
+echo "**********\n\n";
 
 /* Add a new callback */
+echo "**********\n";
+echo "Creating new Webhook\n";
 $callbackValues = array(
     'event' => 'payment.status.changed',
     'target' => 'https://mysite.com/callbacks/payment'
@@ -21,24 +34,36 @@ $resp = Beyonic_Webhook::create( $callbackValues );
 echo 'Create Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 $newWebhook = $resp;
 echo "Webhook $newWebhook->id calls $newWebhook->target on event $newWebhook->event.\n";
+echo "**********\n\n";
 
 /* Update the new callback */
+echo "**********\n";
+echo "Updating Webhook\n";
 $newWebhook->target = 'https://mysite.com/callbacks/v2/payment';
 $updatedWebhook = $newWebhook->send();
+echo "Creating new Webhook\n";
 echo 'Update Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 echo "Webhook $updatedWebhook->id calls $updatedWebhook->target on event $updatedWebhook->event.\n";
 
+$resp = Beyonic_Webhook::getAll();
+foreach( $resp as $index => $hook )
+  echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
+echo "**********\n\n";
+
 /* Delete the new callback */
+echo "**********\n";
+echo "Deleting Webhook $newWebhook->id\n";
 $resp = Beyonic_Webhook::delete( $newWebhook->id );
 echo 'Delete Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 
-/* Show the current callbacks */
 $resp = Beyonic_Webhook::getAll();
-echo 'Get Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 foreach( $resp as $index => $hook )
   echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
+echo "**********\n\n";
 
 /* Create a Payment */
+echo "**********\n";
+echo "Create Payment\n";
 $paymentValues = array(
     /* Phone number being charged */
     'phonenumber' => '+15555551212',
@@ -60,5 +85,6 @@ foreach( $resp as $key => $value )
       echo "\tKey: $k\tValue: $v\n";
   }
   else
-    echo "Key: $key\tValue: $value\n"
+    echo "Key: $key\tValue: $value\n";
+echo "**********\n\n";
 ?>

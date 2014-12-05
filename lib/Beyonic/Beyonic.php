@@ -1,5 +1,7 @@
 <?php
 
+require_once( dirname(__FILE__) . '/Beyonic_Exception.php' );
+
 /*
   The Beyonic class provides manages the requests to the Beyonic endpoint.
 */
@@ -54,15 +56,14 @@ class Beyonic {
 
 		$ch = curl_init();
     switch ($method) {
-      case 'GET':     if( $id != null ) $requestURL .= '/' . $id;
-                      break;
+      case 'GET':     break;
       case 'POST':    curl_setopt($ch, CURLOPT_POST, 1);
                       if( $jsonData != null ) {
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
                         $httpHeaders[] = 'Content-Length:' . strlen( $jsonData );
                       }
                       break;
-      case 'PUT':     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+      case 'PATCH':     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
                       if( $jsonData != null ) {
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
                         $httpHeaders[] = 'Content-Length:' . strlen( $jsonData );
@@ -83,21 +84,26 @@ class Beyonic {
     $response = curl_exec($ch);
 
     $responseArray = array();
+    $responseArray['requestURL'] = $requestURL;
     $responseArray['httpResponseCode'] = curl_getinfo( $ch, CURLINFO_HTTP_CODE);
 
     $headerSize = curl_getinfo( $ch, CURLINFO_HEADER_SIZE);
-    $responseArray['responseJSON'] = substr($response, $headerSize);
+    $responseArray['responseHeader'] = substr( $response, 0, $headerSize);
+    $responseArray['responseBody'] = substr($response, $headerSize);
 
     self::$lastResult = $responseArray;
 
-    $endpointObject = json_decode( $responseArray['responseJSON'] );
+    if( $responseArray['httpResponseCode'] >= 400 ) {
+      $headerArray = preg_split( "/\n/", $responseArray['responseHeader'] );
+      throw new Beyonic_Exception( substr($headerArray[0],0,strlen($headerArray[0]) - 1 ),
+                              $responseArray['httpResponseCode'],
+                              $requestURL,
+                              $method,
+                              $responseArray['responseBody']
+                    );
+    }
 
-    if( $endpointObject != NULL )
-      if( is_array( $endpointObject ) )
-        foreach( $endpointObject as $index => $object )
-          $endpointObject[$index] = new Beyonic_Response( $object, $endpoint );
-      else
-          $endpointObject = new Beyonic_Response( $endpointObject, $endpoint );
+    $endpointObject = json_decode( $responseArray['responseBody'] );
 
     return( $endpointObject );
   }
