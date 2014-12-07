@@ -1,0 +1,28 @@
+{
+  "name": "beyonic/beyonic-php",
+  "description": "Beyonic PHP Library",
+  "keywords": [
+    "beyonic",
+    "mobile payments",
+    "mobile money",
+    "mpesa",
+    "api"
+  ],
+  "homepage": "http://beyonic.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Beyonic",
+      "homepage": "http://beyonic.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.2",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "classmap": ["lib/Beyonic/"]
+  }
+}
