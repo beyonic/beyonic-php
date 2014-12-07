@@ -26,12 +26,6 @@ To install the library via [Composer](https://getcomposer.org/), add composer.js
 }
 ```
 
-Then install via:
-
-```
-composer.phar install
-```
-
 ## Usage
 
 Please visit http://support.beyonic.com/api for usage documentation
