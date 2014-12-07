@@ -16,7 +16,7 @@ require('./lib/Beyonic.php');
 
 ### Composer
 
-To install the library via Composer, add composer.json:
+To install the library via [Composer](https://getcomposer.org/), add composer.json:
 
 ```json
 {
