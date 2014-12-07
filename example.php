@@ -23,6 +23,17 @@ echo 'Get by Id Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCod
 echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
 echo "**********\n\n";
 
+/* Test Error */
+echo "**********\n";
+echo "Generating Error by getting Webhook of id 10000\n";
+try {
+	$hook = Beyonic_Webhook::get( 10000 );
+} catch (Beyonic_Exception $e) {
+	echo "{$e}\n";
+	echo "{$e->responseBody}\n";
+}
+echo "**********\n\n";
+
 /* Add a new callback */
 echo "**********\n";
 echo "Creating new Webhook\n";
