@@ -32,13 +32,14 @@ class Beyonic_Endpoint_Wrapper {
   /* Get the associated object with $id */
   public static function get( $id ) {
 
-    return( new static( Beyonic::sendRequest( static::$endpoint, 'GET', $id ) ) );
+    return( new static( Beyonic::sendRequest( static::$endpoint, 'GET', $id, $parameters  ) ) );
   }
 
-  /* Get all of the associated object with $id */
-  public static function getAll( ) {
+  /* Get all of the associated object */
+  /* Use $parameters (when available) to search for a subset */
+  public static function getAll( $parameters = null ) {
 
-    $resp = Beyonic::sendRequest( static::$endpoint, 'GET', null );
+    $resp = Beyonic::sendRequest( static::$endpoint, 'GET', null, $parameters );
     $all = array();
     foreach( $resp as $index => $json )
       $all[] = new static( $json );

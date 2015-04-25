@@ -4,7 +4,7 @@
 require( 'lib/Beyonic.php' );
 
 /* Set the API Key to be used in all requests */
-Beyonic::setApiKey( '6202349b8068b349b6e0b389be2a65cc36847c75' );
+Beyonic::setApiKey( 'PLACE_YOUR_KEY_HERE' );
 
 /* Show the current callbacks */
 echo "**********\n";
@@ -98,4 +98,31 @@ foreach( $resp as $key => $value )
   else
     echo "Key: $key\tValue: $value\n";
 echo "**********\n\n";
+
+/* Get the available Collections */
+$resp = Beyonic_Collection::getAll();
+echo 'GetAll Collections Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
+foreach( $resp as $key => $value )
+  if( is_object( $value ) || is_array( $value ) ) {
+    echo "Key: $key\n";
+    foreach( $value as $k => $v )
+      echo "\tKey: $k\tValue: $v\n";
+  }
+  else
+    echo "Key: $key\tValue: $value\n";
+echo "**********\n\n";
+
+/* Get the available Collection Requests */
+$resp = Beyonic_Collection_Request::getAll();
+echo 'GetAll CollectionRequests Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
+foreach( $resp as $key => $value )
+  if( is_object( $value ) || is_array( $value ) ) {
+    echo "Key: $key\n";
+    foreach( $value as $k => $v )
+      echo "\tKey: $k\tValue: $v\n";
+  }
+  else
+    echo "Key: $key\tValue: $value\n";
+echo "**********\n\n";
+
 ?>
