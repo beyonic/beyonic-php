@@ -40,10 +40,14 @@ class Beyonic_Endpoint_Wrapper {
   public static function getAll( $parameters = null ) {
 
     $resp = Beyonic::sendRequest( static::$endpoint, 'GET', null, $parameters );
-    $all = array();
-    foreach( $resp as $index => $json )
-      $all[] = new static( $json );
-
+	
+	$all = array();
+    $all["count"] = $resp->count;
+    $all["next"] = $resp->next;
+    $all["previous"] = $resp->previous;
+   	$all["results"] = array();
+    foreach( $resp->results as $index => $json )
+      $all["results"][] = new static( $json );
 
     return( $all );
   }
