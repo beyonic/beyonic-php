@@ -10,6 +10,6 @@ To create new api model you should perform below mentioned steps:
 To release a new version:
 - Increment the version number in lib/Beyonic.php
 - Commit and push the code
-- Create a tag with the same version name as the new version
+- Create a tag (release) with the same name as the new version
 - Go to https://packagist.org and login and update the Beyonic project to fetch the new files
 
