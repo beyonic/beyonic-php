@@ -55,7 +55,9 @@ class Beyonic {
     $httpHeaders = array(
 			'Content-Type: application/json',
 			'Content-Language:en-US',
-      'Authorization: Token ' . self::$apiKey,
+      		'Authorization: Token ' . self::$apiKey,
+    		'Beyonic-Client: Php',
+    		'Beyonic-Client-Version: ' . BEYONIC_CLIENT_VERSION
     );
 
     if( self::$apiVersion != null )
