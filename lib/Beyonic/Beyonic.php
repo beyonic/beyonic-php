@@ -27,6 +27,13 @@ class Beyonic {
 
     self::$apiVersion = $newApiVersion;
   }
+  
+  /*
+   * getClientVersion - Get the client version
+   */
+  public static function getClientVersion() {
+  	return BEYONIC_CLIENT_VERSION;
+  }
 
   /*
     sendRequest - Sends a REST request to the Beyonic API endpoint.
