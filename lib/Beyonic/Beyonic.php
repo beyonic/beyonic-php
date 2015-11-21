@@ -63,7 +63,14 @@ class Beyonic {
 
 		$ch = curl_init();
     switch ($method) {
-      case 'GET':     break;
+      case 'GET':     if ( $parameters != null ) {
+      					$requestURL .= "?";
+      					foreach($parameters as $key=>$value) {
+      						$requestURL .= $key . "=" . urlencode($value) . "&";	
+      					}
+      					var_dump($requestURL);
+      				  }
+      		          break;
       case 'POST':    curl_setopt($ch, CURLOPT_POST, 1);
                       if( $jsonData != null ) {
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
