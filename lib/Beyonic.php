@@ -17,4 +17,5 @@ require_once(dirname(__FILE__) . '/Beyonic/Webhook.php');
 require_once(dirname(__FILE__) . '/Beyonic/Payment.php');
 require_once(dirname(__FILE__) . '/Beyonic/Collection.php');
 require_once(dirname(__FILE__) . '/Beyonic/Collection_Request.php');
+require_once(dirname(__FILE__) . '/Beyonic/Contact.php');
 require_once(dirname(__FILE__) . '/Beyonic/Beyonic_Exception.php');
