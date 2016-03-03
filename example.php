@@ -125,4 +125,17 @@ foreach( $resp as $key => $value )
     echo "Key: $key\tValue: $value\n";
 echo "**********\n\n";
 
+/* Get the Account Balances */
+$resp = Beyonic_Account::getAll();
+echo 'GetAll Account Balances Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
+foreach( $resp as $key => $value )
+  if( is_object( $value ) || is_array( $value ) ) {
+    echo "Key: $key\n";
+    foreach( $value as $k => $v )
+      echo "\tKey: $k\tValue: $v\n";
+  }
+  else
+    echo "Key: $key\tValue: $value\n";
+echo "**********\n\n";
+
 ?>
