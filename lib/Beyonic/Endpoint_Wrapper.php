@@ -30,7 +30,7 @@ class Beyonic_Endpoint_Wrapper {
   }
 
   /* Get the associated object with $id */
-  public static function get( $id ) {
+  public static function get( $id, $parameters = null ) {
 
     return( new static( Beyonic::sendRequest( static::$endpoint, 'GET', $id, $parameters  ) ) );
   }
