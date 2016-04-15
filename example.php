@@ -4,7 +4,7 @@
 require( 'lib/Beyonic.php' );
 
 /* Set the API Key to be used in all requests */
-Beyonic::setApiKey( 'f892cb805a5aabe1d9d7342364cdab365d2a2d69' );
+Beyonic::setApiKey( 'PLACE_YOUR_KEY_HERE' );
 
 /* Show the current callbacks */
 echo "**********\n";
@@ -26,7 +26,7 @@ echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
 echo "**********\n\n";
 
 /* Test Error */
-/*echo "**********\n";
+echo "**********\n";
 echo "Generating Error by getting Webhook of id 10000\n";
 try {
 	$hook = Beyonic_Webhook::get( 10000 );
@@ -34,7 +34,7 @@ try {
 	echo "{$e}\n";
 	echo "{$e->responseBody}\n";
 }
-*/
+
 echo "**********\n\n";
 
 /* Add a new callback */
