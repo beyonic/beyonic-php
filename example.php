@@ -10,15 +10,17 @@ Beyonic::setApiKey( 'PLACE_YOUR_KEY_HERE' );
 echo "**********\n";
 echo "Getting All Webhooks\n";
 $resp = Beyonic_Webhook::getAll();
+$results = $resp['results'];
 echo 'Get Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
-foreach( $resp as $index => $hook )
+foreach( $results as $index => $hook )
   echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
+
 echo "**********\n\n";
 
 /* Get a single callback */
 echo "**********\n";
-echo "Getting Webhook for " . $resp[0]->id . "\n";
-$hook = Beyonic_Webhook::get( $resp[0]->id );
+echo "Getting Webhook for " . $results[0]->id . "\n";
+$hook = Beyonic_Webhook::get( $results[0]->id );
 echo 'Get by Id Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
 echo "**********\n\n";
@@ -32,6 +34,7 @@ try {
 	echo "{$e}\n";
 	echo "{$e->responseBody}\n";
 }
+
 echo "**********\n\n";
 
 /* Add a new callback */
@@ -57,8 +60,9 @@ echo 'Update Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode']
 echo "Webhook $updatedWebhook->id calls $updatedWebhook->target on event $updatedWebhook->event.\n";
 
 $resp = Beyonic_Webhook::getAll();
-foreach( $resp as $index => $hook )
-  echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
+$results = $resp['results'];
+foreach( $results as $index => $hook )
+  echo "Webhook $hook->id calls $hook->target on event $hook->event \n";
 echo "**********\n\n";
 
 /* Delete the new callback */
@@ -68,7 +72,8 @@ $resp = Beyonic_Webhook::delete( $newWebhook->id );
 echo 'Delete Webhook Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
 
 $resp = Beyonic_Webhook::getAll();
-foreach( $resp as $index => $hook )
+$results = $resp['results'];
+foreach( $results as $index => $hook )
   echo "Webhook $hook->id calls $hook->target on event $hook->event.\n";
 echo "**********\n\n";
 
@@ -101,8 +106,9 @@ echo "**********\n\n";
 
 /* Get the available Collections */
 $resp = Beyonic_Collection::getAll();
+$results = $resp['results'];
 echo 'GetAll Collections Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
-foreach( $resp as $key => $value )
+foreach( $results as $key => $value )
   if( is_object( $value ) || is_array( $value ) ) {
     echo "Key: $key\n";
     foreach( $value as $k => $v )
@@ -114,8 +120,9 @@ echo "**********\n\n";
 
 /* Get the available Collection Requests */
 $resp = Beyonic_Collection_Request::getAll();
+$results = $resp['results'];
 echo 'GetAll CollectionRequests Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
-foreach( $resp as $key => $value )
+foreach( $results as $key => $value )
   if( is_object( $value ) || is_array( $value ) ) {
     echo "Key: $key\n";
     foreach( $value as $k => $v )
@@ -127,8 +134,9 @@ echo "**********\n\n";
 
 /* Get the Account Balances */
 $resp = Beyonic_Account::getAll();
+$results = $resp['results'];
 echo 'GetAll Account Balances Response Code: ' . Beyonic::$lastResult['httpResponseCode'] . "\n";
-foreach( $resp as $key => $value )
+foreach( $results as $key => $value )
   if( is_object( $value ) || is_array( $value ) ) {
     echo "Key: $key\n";
     foreach( $value as $k => $v )
