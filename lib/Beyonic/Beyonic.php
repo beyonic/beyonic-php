@@ -27,7 +27,7 @@ class Beyonic {
 
     self::$apiVersion = $newApiVersion;
   }
-  
+
   /*
    * getClientVersion - Get the client version
    */
@@ -49,8 +49,20 @@ class Beyonic {
       $requestURL .= '/' . $id;
 
     $jsonData = null;
-    if( $parameters != null )
+    if( $parameters != null ){
+      $metadata = [];
+      foreach($parameters as $key => $value){
+        // if the key starts with 'metadata.', transform it to array notation
+        if(strpos($key, 'metadata.') === 0){
+          $metadata[explode('.', $key)[1]] = $value;
+          unset($parameters[$key]);
+        }
+      }
+      if($metadata){
+        $parameters = array_merge($parameters, array('metadata'=>$metadata));
+      }
       $jsonData = json_encode( $parameters );
+    }
 
     $httpHeaders = array(
 			'Content-Type: application/json',
@@ -68,7 +80,7 @@ class Beyonic {
       case 'GET':     if ( $parameters != null ) {
       					$requestURL .= "?";
       					foreach($parameters as $key=>$value) {
-      						$requestURL .= $key . "=" . urlencode($value) . "&";	
+      						$requestURL .= $key . "=" . urlencode($value) . "&";
       					}
       					var_dump($requestURL);
       				  }
