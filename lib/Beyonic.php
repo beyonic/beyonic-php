@@ -19,4 +19,5 @@ require_once(dirname(__FILE__) . '/Beyonic/Collection.php');
 require_once(dirname(__FILE__) . '/Beyonic/Collection_Request.php');
 require_once(dirname(__FILE__) . '/Beyonic/Contact.php');
 require_once(dirname(__FILE__) . '/Beyonic/Account.php');
+require_once(dirname(__FILE__) . '/Beyonic/Transaction.php');
 require_once(dirname(__FILE__) . '/Beyonic/Beyonic_Exception.php');
