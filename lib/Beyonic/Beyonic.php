@@ -82,7 +82,6 @@ class Beyonic {
       					foreach($parameters as $key=>$value) {
       						$requestURL .= $key . "=" . urlencode($value) . "&";
       					}
-      					var_dump($requestURL);
       				  }
       		          break;
       case 'POST':    curl_setopt($ch, CURLOPT_POST, 1);
