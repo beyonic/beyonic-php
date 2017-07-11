@@ -2,6 +2,8 @@
 
 Php library for the http://beyonic.com API
 
+It requires PHP version 5.4+
+
 ## Installation
 
 ### Manual
