@@ -8,7 +8,7 @@ require_once( dirname(__FILE__) . '/Beyonic_Exception.php' );
 class Beyonic {
 
   public static $apiKey = null;
-  public static $apiURL = 'https://app.beyonic.com/api';
+  public static $apiURL = 'https://app.beyonic.us/api';
   public static $apiVersion = null;
   public static $lastResult = null;
 
