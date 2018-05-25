@@ -1,5 +1,5 @@
 <?php
-define("BEYONIC_CLIENT_VERSION", "0.0.9");
+define("BEYONIC_CLIENT_VERSION", "0.0.8");
 
 if (!function_exists('curl_init')) {
   throw new Exception('Beyonic requires the CURL PHP extension.');
