@@ -23,7 +23,7 @@ class Beyonic_Exception extends Exception {
 
   // custom string representation of object
   public function __toString() {
-    return __CLASS__ . " Error {$this->code}: {$this->message} when sending {$this->requestMethod} to {$this->requestURL}\n";
+    return __CLASS__ . " Error {$this->code}: {$this->message} when sending {$this->requestMethod} to {$this->requestURL}.\nError Details: {$this->responseBody}\n";
   }
 }
 ?>
