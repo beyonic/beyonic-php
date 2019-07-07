@@ -8,7 +8,7 @@ require_once( dirname(__FILE__) . '/Beyonic_Exception.php' );
 class Beyonic {
 
   public static $apiKey = null;
-  public static $apiURL = 'https://app.beyonic.us/api';
+  public static $apiURL = 'https://app.beyonic.com/api';
   public static $apiVersion = null;
   public static $lastResult = null;
 
@@ -41,8 +41,9 @@ class Beyonic {
       $method is one of GET, POST, PUT or DELETE.
       $id is used to identify the target of a GET, PUT or DELETE request.
       $parameters is used for POST and PUT, are content is based on the request.
+      $headerParameters is used for additional supported header parameters. Allows for overriding headers per request.
   */
-  public static function sendRequest( $endpoint, $method = 'GET', $id = null, $parameters = null) {
+  public static function sendRequest( $endpoint, $method = 'GET', $id = null, $parameters = null, $headerParameters = null) {
 
     $requestURL = self::$apiURL . '/' . $endpoint;
     if( $id != null )
@@ -100,6 +101,13 @@ class Beyonic {
                       break;
     }
 
+
+    // Override header parameters if set
+    if( $headerParameters != null) {
+      foreach($headerParameters as $key => $value) {
+        $httpHeaders[] = $key . ": " . $value;
+      }
+    }
 
     curl_setopt($ch, CURLOPT_URL, $requestURL);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

@@ -17,15 +17,15 @@ class Beyonic_Endpoint_Wrapper {
         $this->$prop = $value;
   }
 
-  /* Send any changes made as a PATCH Request */
-  public function send() {
+  /* Send any changes made as a PATCH Request. Allows for overriding headers per request using $headerParameters */
+  public function send( $headerParameters = null ) {
 
     $values = array();
 
     foreach( $this as $prop => $value )
         $values[$prop] = $value;
 
-    return( $this->update( $this->id, $values ) );
+    return( $this->update( $this->id, $values, $headerParameters ) );
 
   }
 
@@ -52,16 +52,16 @@ class Beyonic_Endpoint_Wrapper {
     return( $all );
   }
 
-  /* Create the new object based on the $parameters */
-  public static function create( $parameters ) {
+  /* Create the new object based on the $parameters and overrides headers for this requestr with $headerParameters */
+  public static function create( $parameters, $headerParameters = null ) {
 
-    return( new static( Beyonic::sendRequest( static::$endpoint, 'POST', null, $parameters ) ) );
+    return( new static( Beyonic::sendRequest( static::$endpoint, 'POST', null, $parameters, $headerParameters ) ) );
   }
 
-  /* Update the object associated with $id usjing $parameters */
-  public static function update( $id, $parameters  ) {
+  /* Update the object associated with $id using $parameters and overrides headers for this request with $headerParameters */
+  public static function update( $id, $parameters, $headerParameters = null ) {
 
-    return( new static( Beyonic::sendRequest( static::$endpoint, 'PATCH', $id, $parameters ) ) );
+    return( new static( Beyonic::sendRequest( static::$endpoint, 'PATCH', $id, $parameters, $headerParameters ) ) );
   }
 
   /* Delete the object associated with $id */
