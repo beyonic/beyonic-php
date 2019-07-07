@@ -1,5 +1,5 @@
 <?php
-define("BEYONIC_CLIENT_VERSION", "0.0.14");
+define("BEYONIC_CLIENT_VERSION", "0.0.15");
 
 if (!function_exists('curl_init')) {
   throw new Exception('Beyonic requires the CURL PHP extension.');
@@ -20,4 +20,6 @@ require_once(dirname(__FILE__) . '/Beyonic/Collection_Request.php');
 require_once(dirname(__FILE__) . '/Beyonic/Contact.php');
 require_once(dirname(__FILE__) . '/Beyonic/Account.php');
 require_once(dirname(__FILE__) . '/Beyonic/Transaction.php');
+require_once(dirname(__FILE__) . '/Beyonic/Currency.php');
+require_once(dirname(__FILE__) . '/Beyonic/Network.php');
 require_once(dirname(__FILE__) . '/Beyonic/Beyonic_Exception.php');
