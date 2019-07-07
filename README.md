@@ -41,6 +41,6 @@ Please visit http://support.beyonic.com/api for usage documentation
 
 Adding Network and Currency APIs, and adding ability to set Duplicate-Check-Key header for each create() or update() request.
 
-# 0.0.12
+# 0.0.14
 
-Bug fixes that prevented Network and Currency APIs from working in 0.0.11
+Bug fixes that prevented Network and Currency APIs from working in 0.0.11, 0.0.12 and 0.0.13
