@@ -12,37 +12,47 @@ class Beyonic {
   public static $apiVersion = null;
   public static $lastResult = null;
 
-  /*
-    setAPIKey - Sets the API Key for this client / developer.
-  */
+  /**
+   * setAPIKey - Sets the API Key for this client / developer.
+   *
+   * @param string $newApiKey
+   * @return void
+   */
   public static function setApiKey( $newApiKey ) {
 
     self::$apiKey = $newApiKey;
   }
 
-  /*
-    setAPIVersion - Sets the API Version for this client / developer.
-  */
+  /**
+   * setAPIVersion - Sets the API Version for this client / developer.
+   *
+   * @param string $newApiVersion
+   * @return void
+   */
   public static function setApiVersion( $newApiVersion ) {
 
     self::$apiVersion = $newApiVersion;
   }
 
-  /*
+  /**
    * getClientVersion - Get the client version
+   *
+   * @return string
    */
   public static function getClientVersion() {
   	return BEYONIC_CLIENT_VERSION;
   }
 
-  /*
-    sendRequest - Sends a REST request to the Beyonic API endpoint.
-      $endpoint is the endpoint that is the target of the request.
-      $method is one of GET, POST, PUT or DELETE.
-      $id is used to identify the target of a GET, PUT or DELETE request.
-      $parameters is used for POST and PUT, are content is based on the request.
-      $headerParameters is used for additional supported header parameters. Allows for overriding headers per request.
-  */
+  /**
+   * sendRequest - Sends a REST request to the Beyonic API endpoint.
+   *
+   * @param string $endpoint the endpoint that is the target of the request
+   * @param string $method s one of GET, POST, PUT or DELETE.
+   * @param strint|int $id used to identify the target of a GET, PUT or DELETE request
+   * @param array|null $parameters used for POST and PUT, are content is based on the request
+   * @param array|null $headerParameters used for additional supported header parameters. Allows for overriding headers per request.
+   * @return mixed Response Object
+   */
   public static function sendRequest( $endpoint, $method = 'GET', $id = null, $parameters = null, $headerParameters = null) {
 
     $requestURL = self::$apiURL . '/' . $endpoint;

@@ -1,8 +1,8 @@
 <?php
 
-/*
-  The BeyonicPayment class provides access to the Payment API.
-*/
+/**
+ * The BeyonicPayment class provides access to the Payment API.
+ */
 class Beyonic_Response {
 
   private $endpoint;
