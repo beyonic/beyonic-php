@@ -30,7 +30,7 @@ To install the library via [Composer](https://getcomposer.org/), add composer.js
 
 ## Usage
 
-Please visit http://support.beyonic.com/api for usage documentation
+Please visit https://developer.mfsafrica.com/docs for usage documentation
 
 [![Latest Stable Version](https://poser.pugx.org/beyonic/beyonic-php/v/stable.svg)](https://packagist.org/packages/beyonic/beyonic-php) [![Latest Unstable Version](https://poser.pugx.org/beyonic/beyonic-php/v/unstable.svg)](https://packagist.org/packages/beyonic/beyonic-php) [![Total Downloads](https://poser.pugx.org/beyonic/beyonic-php/downloads.svg)](https://packagist.org/packages/beyonic/beyonic-php) [![License](https://poser.pugx.org/beyonic/beyonic-php/license.svg)](https://packagist.org/packages/beyonic/beyonic-php)
 
