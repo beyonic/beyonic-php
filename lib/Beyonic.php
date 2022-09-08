@@ -23,3 +23,4 @@ require_once(dirname(__FILE__) . '/Beyonic/Transaction.php');
 require_once(dirname(__FILE__) . '/Beyonic/Currency.php');
 require_once(dirname(__FILE__) . '/Beyonic/Network.php');
 require_once(dirname(__FILE__) . '/Beyonic/Beyonic_Exception.php');
+require_once(dirname(__FILE__) . '/Beyonic/Bank.php');
