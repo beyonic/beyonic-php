@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Beyonic API client version
+ */
+define("BEYONIC_CLIENT_VERSION", "0.0.61");
+
 /*
   The Beyonic_Exception class provides information on errors that may arise
   when using the Beyonic interface.
