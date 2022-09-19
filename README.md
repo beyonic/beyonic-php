@@ -48,3 +48,7 @@ Bug fixes that prevented Network and Currency APIs from working in 0.0.11, 0.0.1
 # 0.0.15
 
 Bug fixes
+
+# 0.0.16
+
+Added the Beyonic Bank API
