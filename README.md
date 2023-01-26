@@ -1,6 +1,6 @@
 # Beyonic PHP Library
 
-Php library for the http://beyonic.com API
+Php library for the http://mfsafrica.com API
 
 It requires PHP version 5.4+
 

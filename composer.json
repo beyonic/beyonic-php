@@ -8,12 +8,12 @@
     "mpesa",
     "api"
   ],
-  "homepage": "http://beyonic.com",
+  "homepage": "http://mfsafrica.com",
   "license": "MIT",
   "authors": [
     {
       "name": "Beyonic",
-      "homepage": "http://beyonic.com"
+      "homepage": "http://mfsafrica.com"
     }
   ],
   "require": {
