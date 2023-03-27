@@ -6,6 +6,7 @@ require_once( dirname(__FILE__) . '/Beyonic.php' );
   The Beyonic_Endpoint_Wrapper class provides common routines needed by
   all interface classses.
 */
+#[AllowDynamicProperties]
 class Beyonic_Endpoint_Wrapper {
 
   protected static $endpoint = null;
